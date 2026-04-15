@@ -114,6 +114,10 @@
 
           const data = await response.json();
           const memberships = data?.data?.me?.memberships || [];
+          banner.style.display = 'flex'; // TEMP - remove before going live
+if (hasNeighborPass) {
+  banner.style.display = 'flex';
+}
           const hasNeighborPass = memberships.some(m =>
             m?.plan?.name?.toLowerCase().includes('neighbor pass')
           );
