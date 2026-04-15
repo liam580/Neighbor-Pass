@@ -10,7 +10,7 @@
       src: url('PalmCanyonDrive-Thin.otf') format('opentype');
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: transparent; }
+    body { background: #fff; font-family: sans-serif; }
     #banner {
       display: none;
       background-color: #f5f0e8;
@@ -39,7 +39,6 @@
       font-size: 32px;
       color: #1a3a2a;
       line-height: 1;
-      letter-spacing: 0.5px;
     }
     .sub-text {
       font-family: -apple-system, sans-serif;
@@ -50,10 +49,16 @@
       color: #1a3a2a;
       opacity: 0.6;
     }
+    #debug {
+      font-size: 9px;
+      padding: 10px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      color: #333;
+    }
   </style>
 </head>
 <body>
-
   <div id="banner">
     <div class="check">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,15 +70,20 @@
       <div class="sub-text">Official Neighbor ✦</div>
     </div>
   </div>
+  <div id="debug">Loading...</div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
     const banner = document.getElementById('banner');
+    const debug = document.getElementById('debug');
 
     if (!token) {
-      banner.style.display = 'flex'; // preview mode
+      banner.style.display = 'flex';
+      debug.textContent = 'No token - preview mode';
     } else {
+      debug.textContent = 'Token: ' + token.slice(-6) + ' (last 6 chars)\nCalling API...';
+
       async function checkForNeighborPass() {
         try {
           const response = await fetch('https://api.optixapp.com/graphql', {
@@ -88,10 +98,27 @@
           });
 
           const data = await response.json();
+          debug.textContent = JSON.stringify(data, null, 2);
+
           const plans = data?.data?.accountPlans?.data || [];
           const hasNeighborPass = plans.some(p =>
             p?.name?.toLowerCase().includes('neighbor pass') && p?.status === 'ACTIVE'
           );
 
           if (hasNeighborPass) {
-            banner.style.
+            banner.style.display = 'flex';
+            debug.textContent += '\n\n✅ Neighbor Pass ACTIVE!';
+          } else {
+            debug.textContent += '\n\n❌ No active Neighbor Pass found';
+          }
+
+        } catch (err) {
+          debug.textContent = 'ERROR: ' + err.message;
+        }
+      }
+
+      checkForNeighborPass();
+    }
+  </script>
+</body>
+</html>
