@@ -10,17 +10,19 @@
       src: url('PalmCanyonDrive-Thin.otf') format('opentype');
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: transparent; }
+    html, body {
+      height: 100%;
+      background: transparent;
+    }
     #banner {
       display: none;
       background-color: #f5f0e8;
       border-radius: 14px;
-      margin: 12px;
       padding: 16px 20px;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      border: 1px solid #e0d8cc;
+      margin: 0;
+      height: 100%;
     }
     .check {
       width: 36px;
