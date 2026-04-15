@@ -5,123 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Neighbor Pass Banner</title>
   <style>
+    @font-face {
+      font-family: 'PalmCanyonDrive';
+      src: url('PalmCanyonDrive-Thin.otf') format('opentype');
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: transparent; }
+    body { background: transparent; }
 
     #banner {
-      display: none; /* hidden until we confirm they have the pass */
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      color: white;
-      padding: 16px 20px;
-      border-radius: 12px;
+      display: none;
+      background-color: #f5f0e8;
+      border-radius: 14px;
       margin: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      padding: 16px 20px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e0d8cc;
     }
 
-    #banner .label {
+    .check {
+      width: 36px;
+      height: 36px;
+      background-color: #1a3a2a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .check svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .script-text {
+      font-family: 'PalmCanyonDrive', cursive;
+      font-size: 32px;
+      color: #1a3a2a;
+      line-height: 1;
+      letter-spacing: 0.5px;
+    }
+
+    .sub-text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      font-weight: 600;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: #90caf9;
-      margin-bottom: 4px;
-    }
-
-    #banner h2 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    #banner p {
-      font-size: 13px;
-      color: #ccc;
-      line-height: 1.4;
-    }
-
-    #banner .icon {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    #loading {
-      padding: 20px;
-      text-align: center;
-      color: #999;
-      font-size: 13px;
+      color: #1a3a2a;
+      opacity: 0.6;
     }
   </style>
 </head>
 <body>
 
-  <div id="loading">Loading...</div>
-
   <div id="banner">
-    <div class="icon">⛳</div>
-    <div class="label">Welcome, Neighbor</div>
-    <h2>You're In the Club.</h2>
-    <p>Your Neighbor Pass gives you exclusive access to ClubHouse Golf. See you on the course.</p>
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 13l4 4L19 7" stroke="#f5f0e8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="text-block">
+      <div class="script-text">clubhouse</div>
+      <div class="sub-text">Official Neighbor ✦</div>
+    </div>
   </div>
 
   <script>
-    // Step 1: Get the token from the URL (Optix puts it there automatically)
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
-
     const banner = document.getElementById('banner');
-    const loading = document.getElementById('loading');
 
     if (!token) {
-      // No token = not logged in, hide everything
-      loading.style.display = 'none';
-      return;
-    }
-
-    // Step 2: Use the Optix API to check this user's memberships/plans
-    async function checkForNeighborPass() {
-      try {
-        const response = await fetch('https://api.optixapp.com/graphql', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-          },
-          body: JSON.stringify({
-            query: `
-              query {
-                me {
-                  memberships {
-                    plan {
-                      name
+      // No token, stay hidden
+    } else {
+      async function checkForNeighborPass() {
+        try {
+          const response = await fetch('https://api.optixapp.com/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+              query: `
+                query {
+                  me {
+                    memberships {
+                      plan {
+                        name
+                      }
                     }
                   }
                 }
-              }
-            `
-          })
-        });
+              `
+            })
+          });
 
-        const data = await response.json();
+          const data = await response.json();
+          const memberships = data?.data?.me?.memberships || [];
+          const hasNeighborPass = memberships.some(m =>
+            m?.plan?.name?.toLowerCase().includes('neighbor pass')
+          );
 
-        // Step 3: Look through their plans for "Neighbor Pass"
-        const memberships = data?.data?.me?.memberships || [];
-        const hasNeighborPass = memberships.some(m =>
-          m?.plan?.name?.toLowerCase().includes('neighbor pass')
-        );
+          if (hasNeighborPass) {
+            banner.style.display = 'flex';
+          }
 
-        loading.style.display = 'none';
-
-        if (hasNeighborPass) {
-          banner.style.display = 'block'; // Show the banner!
+        } catch (err) {
+          console.error('Error checking membership:', err);
         }
-
-      } catch (err) {
-        loading.style.display = 'none';
-        console.error('Error checking membership:', err);
       }
-    }
 
-    checkForNeighborPass();
+      checkForNeighborPass();
+    }
   </script>
 
 </body>
