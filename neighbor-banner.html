@@ -20,91 +20,94 @@
 
     html, body {
       width: 100%;
+      height: 100%;
       background: transparent;
       overflow: hidden;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body {
-      margin: 0;
-      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: transparent;
     }
 
-    /* No fake card. Optix supplies the outer box. */
     #banner {
       display: none;
       width: 100%;
+      height: 100%;
+      padding: 0 14px;
       background: transparent;
-      border: none;
-      box-shadow: none;
-      padding: 8px 10px 6px 10px;
     }
 
     .wrap {
-      display: grid;
-      grid-template-columns: 40px minmax(0, 1fr);
-      grid-template-rows: auto auto;
-      column-gap: 12px;
-      align-items: center;
       width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
     }
 
     .check {
-      grid-column: 1;
-      grid-row: 1 / span 2;
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
       border-radius: 999px;
       background: #0f5a34;
       display: flex;
       align-items: center;
       justify-content: center;
-      align-self: center;
+      flex-shrink: 0;
     }
 
     .check svg {
-      width: 17px;
-      height: 17px;
+      width: 18px;
+      height: 18px;
       display: block;
     }
 
+    .text {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      flex: 1;
+      transform: translateY(1px);
+    }
+
     .official {
-      grid-column: 2;
-      grid-row: 1;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 5px;
       text-transform: uppercase;
       color: #9a9d97;
       line-height: 1;
       white-space: nowrap;
-      margin-bottom: 2px;
     }
 
     .neighbor {
-      grid-column: 2;
-      grid-row: 2;
-      width: 100%;
       font-family: 'PalmCanyonDrive', cursive;
-      font-size: 30px;
-      line-height: 1.05;
+      font-size: 34px;
+      line-height: 0.92;
       color: #143a29;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: clip;
-      padding-bottom: 3px;
+      padding-bottom: 4px;
     }
 
     @media (max-width: 430px) {
       .neighbor {
-        font-size: 28px;
+        font-size: 31px;
       }
     }
 
     @media (max-width: 390px) {
       .neighbor {
-        font-size: 26px;
+        font-size: 29px;
       }
 
       .official {
@@ -123,8 +126,10 @@
         </svg>
       </div>
 
-      <div class="official">OFFICIAL</div>
-      <div class="neighbor">clubhouse neighbor</div>
+      <div class="text">
+        <div class="official">OFFICIAL</div>
+        <div class="neighbor">clubhouse neighbor</div>
+      </div>
     </div>
   </div>
 
