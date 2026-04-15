@@ -19,7 +19,9 @@
     }
 
     html, body {
+      width: 100%;
       background: transparent;
+      overflow: hidden;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -27,71 +29,80 @@
       padding: 0;
     }
 
+    /* No border, no shadow, no extra white card */
     #banner {
       display: none;
       width: 100%;
-      min-height: 84px;
-      padding: 14px 16px;
-      background: #ffffff;
-      border: 1px solid #dedede;
-      border-radius: 12px;
+      padding: 10px 14px 14px 14px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      column-gap: 14px;
       align-items: center;
-      gap: 14px;
     }
 
     .check {
+      grid-column: 1;
+      grid-row: 1 / span 2;
       width: 42px;
       height: 42px;
-      min-width: 42px;
       border-radius: 999px;
-      background: #0f4b2f;
+      background: #0f5a34;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      align-self: center;
+      margin-top: 2px;
     }
 
     .check svg {
       width: 20px;
       height: 20px;
-    }
-
-    .text-wrap {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      line-height: 1;
+      display: block;
     }
 
     .official {
+      grid-column: 2;
+      grid-row: 1;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       text-transform: uppercase;
-      color: #8f9491;
+      color: #9a9d97;
+      line-height: 1;
       margin-bottom: 2px;
     }
 
     .neighbor {
+      grid-column: 2;
+      grid-row: 2;
       width: 100%;
       font-family: 'PalmCanyonDrive', cursive;
-      font-size: 54px;
-      line-height: 0.8;
-      color: #173d2b;
+      font-size: 72px;
+      line-height: 0.72;
+      color: #143a29;
       white-space: nowrap;
       transform: translateY(2px);
     }
 
-    /* Slightly smaller on narrow phones */
-    @media (max-width: 390px) {
+    @media (max-width: 430px) {
       .neighbor {
-        font-size: 48px;
+        font-size: 66px;
       }
 
       .official {
-        letter-spacing: 3px;
+        letter-spacing: 4px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .neighbor {
+        font-size: 60px;
       }
     }
   </style>
@@ -105,10 +116,8 @@
       </svg>
     </div>
 
-    <div class="text-wrap">
-      <div class="official">OFFICIAL</div>
-      <div class="neighbor">Neighbor</div>
-    </div>
+    <div class="official">OFFICIAL</div>
+    <div class="neighbor">Neighbor</div>
   </div>
 
   <script>
@@ -117,7 +126,7 @@
     const preview = params.get('preview') === 'true';
     const banner = document.getElementById('banner');
 
-    async function checkForNeighborPass() {
+    async function checkForPlan() {
       try {
         const response = await fetch('https://api.optixapp.com/graphql', {
           method: 'POST',
@@ -142,7 +151,7 @@
         const hasPlans = data?.data?.me?.user?.has_plans === true;
 
         if (hasPlans) {
-          banner.style.display = 'flex';
+          banner.style.display = 'grid';
         }
       } catch (err) {
         console.error('Error checking plan:', err);
@@ -150,9 +159,9 @@
     }
 
     if (preview) {
-      banner.style.display = 'flex';
+      banner.style.display = 'grid';
     } else if (token) {
-      checkForNeighborPass();
+      checkForPlan();
     }
   </script>
 
