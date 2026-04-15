@@ -27,42 +27,49 @@
 
     body {
       padding: 0;
+      margin: 0;
     }
 
-    /* No border, no shadow, no extra white card */
+    /*
+      No extra card styling here.
+      Let Optix provide the outer tile.
+      Negative top margin helps visually kill the awkward top gap from the wrapper.
+    */
     #banner {
       display: none;
       width: 100%;
-      padding: 10px 14px 14px 14px;
+      margin-top: -10px;
+      padding: 0 12px 10px 12px;
       background: transparent;
       border: none;
       border-radius: 0;
       box-shadow: none;
 
       display: grid;
-      grid-template-columns: 58px minmax(0, 1fr);
+      grid-template-columns: 54px minmax(0, 1fr);
       grid-template-rows: auto auto;
-      column-gap: 14px;
-      align-items: center;
+      column-gap: 12px;
+      align-items: start;
     }
 
     .check {
       grid-column: 1;
       grid-row: 1 / span 2;
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 999px;
       background: #0f5a34;
       display: flex;
       align-items: center;
       justify-content: center;
       align-self: center;
-      margin-top: 2px;
+      margin-top: 14px;
+      flex-shrink: 0;
     }
 
     .check svg {
-      width: 20px;
-      height: 20px;
+      width: 19px;
+      height: 19px;
       display: block;
     }
 
@@ -75,34 +82,33 @@
       text-transform: uppercase;
       color: #9a9d97;
       line-height: 1;
+      margin-top: 10px;
       margin-bottom: 2px;
     }
 
     .neighbor {
-      grid-column: 2;
+      grid-column: 1 / span 2;
       grid-row: 2;
       width: 100%;
       font-family: 'PalmCanyonDrive', cursive;
-      font-size: 72px;
-      line-height: 0.72;
+      font-size: 56px;
+      line-height: 0.82;
       color: #143a29;
       white-space: nowrap;
-      transform: translateY(2px);
+      text-align: left;
+      transform: translateY(-2px);
+      padding-left: 54px;
     }
 
     @media (max-width: 430px) {
       .neighbor {
-        font-size: 66px;
-      }
-
-      .official {
-        letter-spacing: 4px;
+        font-size: 50px;
       }
     }
 
     @media (max-width: 390px) {
       .neighbor {
-        font-size: 60px;
+        font-size: 46px;
       }
     }
   </style>
@@ -117,7 +123,7 @@
     </div>
 
     <div class="official">OFFICIAL</div>
-    <div class="neighbor">Neighbor</div>
+    <div class="neighbor">clubhouse neighbor</div>
   </div>
 
   <script>
