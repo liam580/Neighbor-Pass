@@ -27,36 +27,37 @@
     }
 
     body {
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent;
     }
 
     #banner {
       display: none;
       width: 100%;
       height: 100%;
-      padding: 6px 8px;
+      padding: 8px 12px;
       background: transparent;
     }
 
-    .wrap {
+    .panel {
       width: 100%;
       height: 100%;
+      min-height: 58px;
+      background: #e7e4d6;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       gap: 12px;
-      min-width: 0;
-      background: #EDEBDC;
-      border-radius: 12px;
       padding: 0 14px;
+      overflow: hidden;
     }
 
     .check {
-      width: 36px;
-      height: 36px;
-      min-width: 36px;
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
       border-radius: 999px;
       background: #0f5a34;
       display: flex;
@@ -73,12 +74,11 @@
 
     .text {
       min-width: 0;
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 3px;
-      flex: 1;
-      transform: translateY(1px);
+      gap: 2px;
     }
 
     .official {
@@ -86,7 +86,7 @@
       font-weight: 700;
       letter-spacing: 5px;
       text-transform: uppercase;
-      color: #8f9486;
+      color: #9a9d97;
       line-height: 1;
       white-space: nowrap;
     }
@@ -94,7 +94,7 @@
     .neighbor {
       font-family: 'PalmCanyonDrive', cursive;
       font-size: 34px;
-      line-height: 0.92;
+      line-height: 0.9;
       color: #143a29;
       white-space: nowrap;
       overflow: hidden;
@@ -122,7 +122,7 @@
 <body>
 
   <div id="banner">
-    <div class="wrap">
+    <div class="panel">
       <div class="check">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 12.5L9.2 16.7L19 7.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
