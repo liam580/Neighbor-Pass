@@ -28,92 +28,116 @@
 
     body {
       background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     #banner {
       display: none;
       width: 100%;
       height: 100%;
-      padding: 8px 12px;
+      padding: 14px;
       background: transparent;
     }
 
     .panel {
       width: 100%;
       height: 100%;
-      min-height: 58px;
       background: #e7e4d6;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 14px;
+      border-radius: 22px;
+      padding: 28px 26px;
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      grid-template-rows: auto 1fr;
+      column-gap: 18px;
+      row-gap: 8px;
+      align-items: start;
       overflow: hidden;
     }
 
     .check {
-      width: 38px;
-      height: 38px;
-      min-width: 38px;
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      width: 64px;
+      height: 64px;
       border-radius: 999px;
       background: #0f5a34;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      align-self: start;
+      margin-top: 8px;
     }
 
     .check svg {
-      width: 18px;
-      height: 18px;
+      width: 28px;
+      height: 28px;
       display: block;
     }
 
-    .text {
-      min-width: 0;
-      flex: 1;
+    .official-line {
+      grid-column: 2;
+      grid-row: 1;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 2px;
-    }
-
-    .official {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: #9a9d97;
-      line-height: 1;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
       white-space: nowrap;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #8f9388;
+      line-height: 1;
+      padding-top: 6px;
     }
 
     .neighbor {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: start;
+      width: 100%;
       font-family: 'PalmCanyonDrive', cursive;
-      font-size: 34px;
-      line-height: 0.9;
+      font-size: 92px;
+      line-height: 0.92;
       color: #143a29;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: clip;
-      padding-bottom: 4px;
+      padding-bottom: 14px;
     }
 
     @media (max-width: 430px) {
+      .panel {
+        padding: 22px 20px;
+        grid-template-columns: 72px minmax(0, 1fr);
+      }
+
+      .check {
+        width: 56px;
+        height: 56px;
+      }
+
+      .check svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .official-line {
+        font-size: 12px;
+        letter-spacing: 5px;
+      }
+
       .neighbor {
-        font-size: 31px;
+        font-size: 76px;
       }
     }
 
     @media (max-width: 390px) {
       .neighbor {
-        font-size: 29px;
+        font-size: 68px;
       }
 
-      .official {
+      .official-line {
+        font-size: 11px;
         letter-spacing: 4px;
       }
     }
@@ -125,14 +149,12 @@
     <div class="panel">
       <div class="check">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12.5L9.2 16.7L19 7.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 12.5L9.2 16.7L19 7.5" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
 
-      <div class="text">
-        <div class="official">OFFICIAL</div>
-        <div class="neighbor">clubhouse neighbor</div>
-      </div>
+      <div class="official-line">OFFICIAL CLUBHOUSE</div>
+      <div class="neighbor">neighbor</div>
     </div>
   </div>
 
