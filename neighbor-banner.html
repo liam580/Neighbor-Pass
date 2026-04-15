@@ -10,23 +10,19 @@
       src: url('PalmCanyonDrive-Thin.otf') format('opentype');
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      height: 100%;
-      background: transparent;
-    }
+    html, body { height: 100%; background: transparent; }
+
     #banner {
       display: none;
-      background-color: #f5f0e8;
-      border-radius: 14px;
-      padding: 16px 20px;
       align-items: center;
-      gap: 12px;
-      margin: 0;
+      gap: 16px;
+      padding: 14px 20px;
       height: 100%;
     }
+
     .check {
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       background-color: #1a3a2a;
       border-radius: 50%;
       display: flex;
@@ -34,23 +30,31 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    .check svg { width: 18px; height: 18px; }
-    .text-block { display: flex; flex-direction: column; gap: 2px; }
+
+    .check svg { width: 22px; height: 22px; }
+
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+    }
+
+    .label {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #1a3a2a;
+      opacity: 0.5;
+    }
+
     .script-text {
       font-family: 'PalmCanyonDrive', cursive;
-      font-size: 32px;
+      font-size: 36px;
       color: #1a3a2a;
       line-height: 1;
       letter-spacing: 0.5px;
-    }
-    .sub-text {
-      font-family: -apple-system, sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #1a3a2a;
-      opacity: 0.6;
     }
   </style>
 </head>
@@ -58,12 +62,12 @@
   <div id="banner">
     <div class="check">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5 13l4 4L19 7" stroke="#f5f0e8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
     <div class="text-block">
-      <div class="script-text">clubhouse</div>
-      <div class="sub-text">Official Neighbor ✦</div>
+      <div class="label">Official</div>
+      <div class="script-text">Neighbor</div>
     </div>
   </div>
 
