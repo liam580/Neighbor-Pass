@@ -28,22 +28,22 @@
     body {
       margin: 0;
       padding: 0;
+      background: transparent;
     }
 
-    /* Let Optix provide the outer card/border */
+    /* No fake card. Optix supplies the outer box. */
     #banner {
       display: none;
       width: 100%;
       background: transparent;
       border: none;
       box-shadow: none;
-      padding: 2px 10px 8px 10px;
-      margin-top: -6px; /* counteracts Optix top spacing a bit */
+      padding: 8px 10px 6px 10px;
     }
 
-    .inner {
+    .wrap {
       display: grid;
-      grid-template-columns: 50px minmax(0, 1fr);
+      grid-template-columns: 40px minmax(0, 1fr);
       grid-template-rows: auto auto;
       column-gap: 12px;
       align-items: center;
@@ -53,35 +53,33 @@
     .check {
       grid-column: 1;
       grid-row: 1 / span 2;
-      width: 40px;
-      height: 40px;
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
       background: #0f5a34;
       display: flex;
       align-items: center;
       justify-content: center;
       align-self: center;
-      margin-top: 10px;
     }
 
     .check svg {
-      width: 19px;
-      height: 19px;
+      width: 17px;
+      height: 17px;
       display: block;
     }
 
     .official {
       grid-column: 2;
       grid-row: 1;
-      font-size: 11px;
+      font-size: 9px;
       font-weight: 700;
       letter-spacing: 5px;
       text-transform: uppercase;
       color: #9a9d97;
       line-height: 1;
-      margin-top: 8px;
-      margin-bottom: 2px;
       white-space: nowrap;
+      margin-bottom: 2px;
     }
 
     .neighbor {
@@ -89,24 +87,24 @@
       grid-row: 2;
       width: 100%;
       font-family: 'PalmCanyonDrive', cursive;
-      font-size: 40px;
-      line-height: 1;
+      font-size: 30px;
+      line-height: 1.05;
       color: #143a29;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: clip;
-      padding-bottom: 8px; /* gives descenders room */
+      padding-bottom: 3px;
     }
 
     @media (max-width: 430px) {
       .neighbor {
-        font-size: 37px;
+        font-size: 28px;
       }
     }
 
     @media (max-width: 390px) {
       .neighbor {
-        font-size: 34px;
+        font-size: 26px;
       }
 
       .official {
@@ -118,7 +116,7 @@
 <body>
 
   <div id="banner">
-    <div class="inner">
+    <div class="wrap">
       <div class="check">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5 12.5L9.2 16.7L19 7.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
