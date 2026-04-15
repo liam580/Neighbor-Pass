@@ -27,6 +27,7 @@
     }
 
     body {
+      padding: 12px;
       background: transparent;
     }
 
@@ -34,60 +35,53 @@
       display: none;
       width: 100%;
       height: 100%;
-      padding: 14px;
-      background: transparent;
     }
 
     .panel {
       width: 100%;
       height: 100%;
-      background: #e7e4d6;
-      border-radius: 22px;
+      background: #e6e3d4;
+      border-radius: 24px;
       padding: 28px 26px;
       display: grid;
-      grid-template-columns: 84px minmax(0, 1fr);
+      grid-template-columns: 92px minmax(0, 1fr);
       grid-template-rows: auto 1fr;
       column-gap: 18px;
-      row-gap: 8px;
-      align-items: start;
+      row-gap: 10px;
       overflow: hidden;
     }
 
     .check {
       grid-column: 1;
       grid-row: 1 / span 2;
-      width: 64px;
-      height: 64px;
+      width: 72px;
+      height: 72px;
       border-radius: 999px;
       background: #0f5a34;
       display: flex;
       align-items: center;
       justify-content: center;
       align-self: start;
-      margin-top: 8px;
+      margin-top: 4px;
     }
 
     .check svg {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       display: block;
     }
 
-    .official-line {
+    .topline {
       grid-column: 2;
       grid-row: 1;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      white-space: nowrap;
       font-size: 14px;
       font-weight: 700;
       letter-spacing: 6px;
       text-transform: uppercase;
       color: #8f9388;
       line-height: 1;
-      padding-top: 6px;
+      white-space: nowrap;
+      padding-top: 8px;
     }
 
     .neighbor {
@@ -96,47 +90,47 @@
       align-self: start;
       width: 100%;
       font-family: 'PalmCanyonDrive', cursive;
-      font-size: 92px;
-      line-height: 0.92;
+      font-size: 112px;
+      line-height: 0.9;
       color: #143a29;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: clip;
-      padding-bottom: 14px;
+      padding-bottom: 16px;
     }
 
     @media (max-width: 430px) {
       .panel {
-        padding: 22px 20px;
-        grid-template-columns: 72px minmax(0, 1fr);
+        padding: 24px 20px;
+        grid-template-columns: 76px minmax(0, 1fr);
       }
 
       .check {
-        width: 56px;
-        height: 56px;
+        width: 60px;
+        height: 60px;
       }
 
       .check svg {
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
       }
 
-      .official-line {
+      .topline {
         font-size: 12px;
         letter-spacing: 5px;
       }
 
       .neighbor {
-        font-size: 76px;
+        font-size: 88px;
       }
     }
 
     @media (max-width: 390px) {
       .neighbor {
-        font-size: 68px;
+        font-size: 78px;
       }
 
-      .official-line {
+      .topline {
         font-size: 11px;
         letter-spacing: 4px;
       }
@@ -153,7 +147,7 @@
         </svg>
       </div>
 
-      <div class="official-line">OFFICIAL CLUBHOUSE</div>
+      <div class="topline">OFFICIAL CLUBHOUSE</div>
       <div class="neighbor">neighbor</div>
     </div>
   </div>
