@@ -81,7 +81,7 @@
     const debug = document.getElementById('debug');
 
     if (!token) {
-      debug.textContent = 'No token found in URL - preview mode';
+      debug.textContent = 'No token - preview mode';
       banner.style.display = 'flex';
     } else {
       debug.textContent = 'Token found, calling API...';
@@ -95,24 +95,12 @@
               'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify({
-              query: `query { me { memberships { plan { name } } } }`
+              query: `query { me { id email firstName lastName } }`
             })
           });
 
           const data = await response.json();
           debug.textContent = JSON.stringify(data, null, 2);
-
-          const memberships = data?.data?.me?.memberships || [];
-          const hasNeighborPass = memberships.some(m =>
-            m?.plan?.name?.toLowerCase().includes('neighbor pass')
-          );
-
-          if (hasNeighborPass) {
-            banner.style.display = 'flex';
-            debug.textContent += '\n\n✅ Neighbor Pass found!';
-          } else {
-            debug.textContent += '\n\n❌ No Neighbor Pass found in memberships';
-          }
 
         } catch (err) {
           debug.textContent = 'ERROR: ' + err.message;
